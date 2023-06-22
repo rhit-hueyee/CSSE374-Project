@@ -27,6 +27,9 @@ public class MainApp {
 		int height = 550;
 		frame.setSize(width, height); //changed the y 
 		
+		SpeedSettings speedSettings = SpeedSettings.getInstance();
+		speedSettings.setGlobalSpeedSettings(3);
+		
 		ScreenComponent drawer = new ScreenComponent(width, height);
 		frame.add(drawer,BorderLayout.CENTER);
 		
