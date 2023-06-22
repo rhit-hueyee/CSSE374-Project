@@ -40,7 +40,6 @@ public class GameTickListener implements ActionListener {
 		screen.updateState();
 		screen.drawScreen();
 		label.setText(screen.getLives()); //new
-		
 	}
 
 }
