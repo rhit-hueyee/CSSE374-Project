@@ -63,20 +63,30 @@ public class ScreenComponent extends JComponent{
 		hero = new HeroComponent(levelLoader.getHero());
 		entities.add(hero);
 		createBorderPlatforms();
+		AlienComponentFactory factory = null;
 		for(int i = 0; i < levelLoader.getHorizontalAliens().size(); i++) {
-			entities.add(new HorizontalAlien(levelLoader.getHorizontalAliens().get(i)));
+			factory = new HorizontalAlienFactory();
+			AlienComponent horizontalAlien = factory.createAlienComponent(levelLoader.getHorizontalAliens().get(i));
+			entities.add(horizontalAlien);
+			//entities.add(new HorizontalAlien(levelLoader.getHorizontalAliens().get(i)));
 		}
 		for(int i = 0; i < levelLoader.getVerticalAliens().size(); i++) {
-			entities.add(new VerticalAlien(levelLoader.getVerticalAliens().get(i)));
+			factory = new VerticalAlienFactory();
+			AlienComponent verticalAlien = factory.createAlienComponent(levelLoader.getVerticalAliens().get(i));
+			entities.add(verticalAlien);
+			//entities.add(new VerticalAlien(levelLoader.getVerticalAliens().get(i)));
 		}
 		for(int i = 0; i < levelLoader.getTrackerAliens().size(); i++) {
-			entities.add(new TrackerAlien(levelLoader.getTrackerAliens().get(i), hero));
+			factory = new TrackerAlienFactory();
+			AlienComponent trackerAlien = factory.createAlienComponent(levelLoader.getTrackerAliens().get(i));
+			entities.add(trackerAlien);
+			//entities.add(new TrackerAlien(levelLoader.getTrackerAliens().get(i), hero));
 		}
 		for(int i = 0; i < levelLoader.getBombs().size(); i++) {
-			entities.add(new BombComponent(levelLoader.getBombs().get(i)));
+			//entities.add(new BombComponent(levelLoader.getBombs().get(i)));
 		}
 		for(int i = 0; i < levelLoader.getPlatforms().size(); i++) {
-			entities.add(new Platform(levelLoader.getPlatforms().get(i)));
+			//entities.add(new Platform(levelLoader.getPlatforms().get(i)));
 		}
 		
 		for(Entity e:entities)
