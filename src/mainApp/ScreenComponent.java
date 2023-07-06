@@ -40,6 +40,12 @@ public class ScreenComponent extends JComponent implements Subject{
 		if(this.lives == 0) {
 			this.lives = 1;
 			message = "GAME OVER";
+			try {
+				changeLevel(lvl +1);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//do something else...
 		}
 		else if(this.bombs >= this.bombCount){ 	//based on number of bombs in the level
