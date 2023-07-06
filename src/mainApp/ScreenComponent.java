@@ -3,6 +3,7 @@ package mainApp;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -75,6 +76,9 @@ public class ScreenComponent extends JComponent implements Subject{
 		}
 		entities.add(hero);
 		createBorderPlatforms();
+
+
+
 		for(int i = 0; i < levelLoader.getHorizontalAliens().size(); i++) {
 			entities.add(new HorizontalAlien(levelLoader.getHorizontalAliens().get(i)));
 		}
@@ -91,9 +95,11 @@ public class ScreenComponent extends JComponent implements Subject{
 			entities.add(new Platform(levelLoader.getPlatforms().get(i)));
 		}
 		
-		for(Entity e:entities)
-		{
-			if(e instanceof TrackerAlien)
+		// Iterate over entities using the iterator
+		Iterator<Entity> iterator = new ScreenComponentIterator(entities);
+		while (iterator.hasNext()) {
+		    Entity e = iterator.next();
+		    if(e instanceof TrackerAlien)
 				((TrackerAlien)e).setMap(entities);
 		}
 	}
