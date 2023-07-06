@@ -10,7 +10,7 @@ public class SpeedDecorator extends EntityDecorator {
     public void update() {
         // Modify the speed of the decorated entity
         int increasedSpeed = 2;
-        this.vx += increasedSpeed;
+        this.speedlimit += increasedSpeed;
 
         // Call the original update method of the decorated entity
         super.update();
