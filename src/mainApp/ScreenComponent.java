@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 public class ScreenComponent extends JComponent implements Subject{
-	private HeroComponent hero;
+	private Entity hero;
 	private ArrayList<Entity> entities;
 	private LevelLoader levelLoader;
 	private int width;
@@ -27,7 +27,7 @@ public class ScreenComponent extends JComponent implements Subject{
 		this.width = width;
 		this.height = height;
 		spawnEntities(); //new
-		this.lives = hero.getLives(); 
+		this.lives = ((HeroComponent) hero).getLives(); 
 		this.bombCount = levelLoader.getBombs().size();
 		this.observers = new ArrayList<>();
 	}
@@ -64,6 +64,9 @@ public class ScreenComponent extends JComponent implements Subject{
 	
 	public void spawnEntities() {
 		hero = new HeroComponent(levelLoader.getHero());
+		if(levelLoader.getLevel().contains("2")) {
+			hero = new SpeedDecorator(hero);
+		}
 		entities.add(hero);
 		createBorderPlatforms();
 		for(int i = 0; i < levelLoader.getHorizontalAliens().size(); i++) {
@@ -99,7 +102,7 @@ public class ScreenComponent extends JComponent implements Subject{
 	
 	
 	public void handleArrowPressedInput(int id) {
-		hero.handleArrowPressedInput(id);
+		((HeroComponent) hero).handleArrowPressedInput(id);
 		if(id == 85) {
 		try {
 				this.entities = new ArrayList<Entity>();
@@ -127,7 +130,7 @@ public class ScreenComponent extends JComponent implements Subject{
 	}
 	
 	public void handleArrowReleasedInput(int id) {
-		hero.handleArrowReleasedInput(id);
+		((HeroComponent) hero).handleArrowReleasedInput(id);
 	}
 	
 	public void updateState() {
@@ -141,8 +144,8 @@ public class ScreenComponent extends JComponent implements Subject{
 					Entity.collide(entities.get(i), entities.get(j));
 			}
 		}
-		this.lives = hero.getLives(); //keep this for the label to update correctly
-		this.bombs = hero.getBombs(); //keep this for the label to update correctly
+		this.lives = ((HeroComponent) hero).getLives(); //keep this for the label to update correctly
+		this.bombs = ((HeroComponent) hero).getBombs(); //keep this for the label to update correctly
 		hero.update();
 		
 		for(int i=0;i<entities.size();i++)
