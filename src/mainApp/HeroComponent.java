@@ -33,14 +33,16 @@ public class HeroComponent extends Entity {
 	private static final int hitBoxWidth=10;
 	private static final int hitBoxHeight=10;
 	private static final int ACCELERATION=1;
-	private static final int SPEEDLIMIT=3;
 	private static final int FRICTION=2;
+	
+	SpeedSettings speedSettings = SpeedSettings.getInstance();
+	private int speedlimit;
 
 	public HeroComponent(int x,int y,int vx,int vy) {
 		super(x,y,vx,vy,hitBoxWidth,hitBoxHeight);
 		atAir = true; 
 		ax=ACCELERATION;
-		speedlimit=SPEEDLIMIT;
+		speedlimit=speedSettings.getGlobalSpeedSettings();
 		friction=FRICTION;
 		lives=4;
 	}
@@ -49,7 +51,7 @@ public class HeroComponent extends Entity {
 		super(data[0],data[1],0,0,hitBoxWidth,hitBoxHeight);
 		atAir = true; 
 		ax=ACCELERATION;
-		speedlimit=SPEEDLIMIT;
+		speedlimit=speedSettings.getGlobalSpeedSettings();
 		friction=FRICTION;
 		lives=4;
 		try {
@@ -76,7 +78,7 @@ public class HeroComponent extends Entity {
 		this.y = yStart * 10;
 		atAir = true; 
 		ax=ACCELERATION;
-		speedlimit=SPEEDLIMIT;
+		speedlimit=speedSettings.getGlobalSpeedSettings();;
 		friction=FRICTION;
 		
 		this.lives = 4; //new
@@ -256,13 +258,13 @@ public class HeroComponent extends Entity {
 		{
 			this.x=other.x+other.getHitBox()[0];
 			if(leftPressed)
-				x+=SPEEDLIMIT*2;
+				x+=speedSettings.getGlobalSpeedSettings()*2;
 		}
 		else if(this.x+hitBoxWidth/2<=other.getX()+other.getHitBox()[0]/2)
 		{
 			this.x=other.x-hitBoxWidth;
 			if(rightPressed)
-				x-=SPEEDLIMIT*2;
+				x-=speedSettings.getGlobalSpeedSettings()*2;
 		}
 	}
 
