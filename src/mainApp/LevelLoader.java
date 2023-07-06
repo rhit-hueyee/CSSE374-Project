@@ -86,7 +86,7 @@ public class LevelLoader{
 	}
 	
 	public int[] getHero(){
-		return hero;
+	 return hero;		
 	}
 	
 	public ArrayList<int[]> getHorizontalAliens(){
@@ -107,6 +107,10 @@ public class LevelLoader{
 	
 	public ArrayList<int[]> getPlatforms(){
 		return platforms;
+	}
+	
+	public String getLevel() {
+		return this.level;
 	}
 	
 	
