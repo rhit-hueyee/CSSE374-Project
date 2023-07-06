@@ -3,11 +3,12 @@ package mainApp;
 import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-public class ScreenComponent extends JComponent{
+public class ScreenComponent extends JComponent implements Subject{
 	private HeroComponent hero;
 	private ArrayList<Entity> entities;
 	private LevelLoader levelLoader;
@@ -17,6 +18,7 @@ public class ScreenComponent extends JComponent{
 	private int bombs; 
 	private int bombCount; 
 	private int lvl;
+    private List<Observer> observers;
 	
 	public ScreenComponent(int width, int height) throws FileNotFoundException {
 		this.lvl = 1;
@@ -27,6 +29,7 @@ public class ScreenComponent extends JComponent{
 		spawnEntities(); //new
 		this.lives = hero.getLives(); 
 		this.bombCount = levelLoader.getBombs().size();
+		this.observers = new ArrayList<>();
 	}
 	
 	/*
@@ -138,6 +141,7 @@ public class ScreenComponent extends JComponent{
 	}
 	
 	public void updateState() {
+        notifyObservers();
 		
 		for(int i=0;i<entities.size();i++)
 		{
@@ -165,5 +169,25 @@ public class ScreenComponent extends JComponent{
 	public void drawScreen() {
 		this.repaint();
 	}
+	
+
+
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    }
 	
 }

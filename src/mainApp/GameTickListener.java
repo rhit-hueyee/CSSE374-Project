@@ -28,6 +28,7 @@ public class GameTickListener implements ActionListener {
 	 */
 	public void Addlabel(JLabel label) {
 		this.label = label;
+		screen.addObserver(new GameLabelObserver(screen, label));
 	}
 
 	@Override
@@ -40,7 +41,6 @@ public class GameTickListener implements ActionListener {
 		screen.updateState();
 		screen.drawScreen();
 		label.setText(screen.getLives()); //new
-		
 	}
 
 }
