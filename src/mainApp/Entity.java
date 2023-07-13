@@ -16,6 +16,7 @@ public abstract class Entity extends JComponent{
 	protected int ay;
 	protected int friction;
 	protected double elasticity;
+	protected int speedlimit;
 	protected static final double GAMETICK=50;
 	protected boolean shouldRemove;
 	protected int hitBoxWidth;
