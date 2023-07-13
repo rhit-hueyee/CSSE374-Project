@@ -1,10 +1,10 @@
 package mainApp;
 
 public class TrackerAlienFactory extends AlienComponentFactory {
-    private Entity target;
+       private Entity target;
 
-    public TrackerAlienFactory() {
-        //this.target = target;
+	public TrackerAlienFactory(Entity target) {
+        this.target = target;
     }
 
     @Override
