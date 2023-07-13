@@ -62,46 +62,20 @@ public class ScreenComponent extends JComponent implements Subject{
 		this.levelLoader = new LevelLoader(lvl);
 	}
 	
-	public void createBorderPlatforms() {
-		entities.add(new Platform(0,0,10,height));
-		entities.add(new Platform(0,height-80,width,10));
-		entities.add(new Platform(0,0,width,10));
-		entities.add(new Platform(width-20,0,10,height));
-	}
 	
 	public void spawnEntities() {
-		hero = new HeroComponent(levelLoader.getHero());
-		if(levelLoader.getLevel().contains("2")) {
-			hero = new SpeedDecorator(hero);
-		}
-		entities.add(hero);
-		createBorderPlatforms();
-
-
-
-		for(int i = 0; i < levelLoader.getHorizontalAliens().size(); i++) {
-			entities.add(new HorizontalAlien(levelLoader.getHorizontalAliens().get(i)));
-		}
-		for(int i = 0; i < levelLoader.getVerticalAliens().size(); i++) {
-			entities.add(new VerticalAlien(levelLoader.getVerticalAliens().get(i)));
-		}
-		for(int i = 0; i < levelLoader.getTrackerAliens().size(); i++) {
-			entities.add(new TrackerAlien(levelLoader.getTrackerAliens().get(i), hero));
-		}
-		for(int i = 0; i < levelLoader.getBombs().size(); i++) {
-			entities.add(new BombComponent(levelLoader.getBombs().get(i)));
-		}
-		for(int i = 0; i < levelLoader.getPlatforms().size(); i++) {
-			entities.add(new Platform(levelLoader.getPlatforms().get(i)));
-		}
+		ScreenComponentSpawner spawner = new ConcreteSpawner(this.entities);
 		
-		// Iterate over entities using the iterator
-		Iterator<Entity> iterator = new ScreenComponentIterator(entities);
-		while (iterator.hasNext()) {
-		    Entity e = iterator.next();
-		    if(e instanceof TrackerAlien)
-				((TrackerAlien)e).setMap(entities);
-		}
+		hero = spawner.addHero(levelLoader);
+		spawner.addBorders(this.height, this.width);
+		spawner.addHorizontalAliens(levelLoader);
+		spawner.addVerticalAliens(levelLoader);
+		spawner.addTrackerAliens(levelLoader);
+		spawner.addBombs(levelLoader);
+		spawner.addPlatforms(levelLoader);
+		spawner.setTracker();
+		
+		this.entities = spawner.getEntities();
 	}
 	
 	@Override
