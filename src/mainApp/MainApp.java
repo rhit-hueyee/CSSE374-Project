@@ -37,9 +37,10 @@ public class MainApp {
 		frame.add(label, BorderLayout.SOUTH);
 		
 		
-		KeyHandler kh = new KeyHandler(drawer);
+		KeyPressedCounterProxy keyPressProxy = new KeyPressedCounterProxy(drawer);
+        frame.addKeyListener(keyPressProxy);
 		
-		frame.addKeyListener(kh);
+		//frame.addKeyListener(kh);
 
 		
 		GameTickListener gt=new GameTickListener(drawer);

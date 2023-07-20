@@ -1,5 +1,7 @@
 package mainApp;
 
+import mainApp.TrackerAlien;
+
 public class TrackerAlienFactory extends AlienComponentFactory {
        private Entity target;
 
