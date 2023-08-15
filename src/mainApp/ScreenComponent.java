@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-public class ScreenComponent extends JComponent implements Subject{
+public class ScreenComponent extends JComponent implements Subject, Observer{
 	private Entity hero;
 	private ArrayList<Entity> entities;
 	private LevelLoader levelLoader;
@@ -168,5 +168,11 @@ public class ScreenComponent extends JComponent implements Subject{
             observer.update();
         }
     }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

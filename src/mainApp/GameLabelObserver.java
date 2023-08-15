@@ -16,4 +16,5 @@ public class GameLabelObserver implements Observer {
         String lives = screenComponent.getLives();
         label.setText(lives);
     }
+
 }

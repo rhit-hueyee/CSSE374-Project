@@ -20,6 +20,7 @@ import javax.swing.Timer;
 public class MainApp {
 	//test
 	private JLabel label = new JLabel(); //new
+	private GameTimer gameTimer;
 	
 	private void runApp() throws FileNotFoundException {
 		JFrame frame = new JFrame("Bomb Jack");
@@ -56,6 +57,8 @@ public class MainApp {
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		gameTimer = new GameTimer(frame, 60);
 		
 	} // runApp
 
